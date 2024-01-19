@@ -16,9 +16,9 @@
 
 8) Fetch the top 10 most famous painting subject
 
-10) Identify the museums which are open on both Sunday and Monday. Display museum name, city.
+9) Identify the museums which are open on both Sunday and Monday. Display museum name, city.
 
-11) How many museums are open every single day?
+10) How many museums are open every single day?
 
 12) Which are the top 5 most popular museum? (Popularity is defined based on most no of paintings in a museum)
 

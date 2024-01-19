@@ -126,3 +126,33 @@ on w.work_id = s.work_id
 group by subject
 )
 where rank <= 10
+
+
+-- 9) Identify the museums which are open on both Sunday and Monday. Display museum name, city.
+
+select m.museum_id, m.name, m.name, m.city, m.state, m.country
+from
+(
+    SELECT museum_id, count(1) count
+    from museum_hours
+    where day in ('Sunday', 'Monday')
+    group by museum_id
+) c
+join museum m 
+on c.museum_id = m.museum_id
+where c.count = 2
+
+
+-- 10) How many museums are open every single day?
+
+SELECT count(*)
+from 
+(
+    SELECT mh.museum_id, count(1) as days_open
+    from museum_hours mh 
+    join museum m 
+    on mh.museum_id = m.museum_id
+    GROUP by mh.museum_id
+    having count(1) = 7
+)
+

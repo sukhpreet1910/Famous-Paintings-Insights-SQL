@@ -75,6 +75,7 @@
 
 
 10) Identify the museums which are open on both Sunday and Monday. Display museum name, city.
+
 	select distinct m.name as museum_name, m.city, m.state,m.country
 	from museum_hours mh 
 	join museum m on m.museum_id=mh.museum_id
