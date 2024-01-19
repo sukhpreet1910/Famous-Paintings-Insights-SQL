@@ -30,17 +30,17 @@
 
 15) Which museum has the most no of most popular painting style?
 
-17) Identify the artists whose paintings are displayed in multiple countries
+16) Identify the artists whose paintings are displayed in multiple countries
 
-18) Display the country and the city with most no of museums. Output 2 seperate columns to mention the city and country. If there are multiple value, seperate them with comma.
+17) Display the country and the city with most no of museums. Output 2 seperate columns to mention the city and country. If there are multiple value, seperate them with comma.
 
-19) Identify the artist and the museum where the most expensive and least expensive painting is placed. Display the artist name, sale_price, painting name, museum name, museum city and canvas label
+18) Identify the artist and the museum where the most expensive and least expensive painting is placed. Display the artist name, sale_price, painting name, museum name, museum city and canvas label
 
-20) Which country has the 5th highest no of paintings?
+19) Which country has the 5th highest no of paintings?
 
-21) Which are the 3 most popular and 3 least popular painting styles?
+20) Which are the 3 most popular and 3 least popular painting styles?
 
-22) Which artist has the most no of Portraits paintings outside USA?. Display artist name, no of paintings and the artist nationality.
+21) Which artist has the most no of Portraits paintings outside USA?. Display artist name, no of paintings and the artist nationality.
 
 
  

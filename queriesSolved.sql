@@ -221,3 +221,173 @@ where rank = 1;
 -- 15) Which museum has the most no of most popular painting style?
 
 
+with p_style as
+(
+    select style--, count(1)--, rank() over(order by count(1) desc) as rank
+    from work
+    group by style
+    --order by 2 desc
+),
+
+cte AS
+(select w.museum_id, m.name, ps.style as style, count(1) as no_of_paintings,
+rank() over(order by count(1) desc) as rank
+from work w
+join museum m
+on w.museum_id = m.museum_id
+
+join p_style ps
+on w.style = ps.style
+
+where m.museum_id is not null --and ps.rank = 1
+group by w.museum_id, m.name, ps.style
+order by 4 desc)
+
+SELECT name as museum_name, style, no_of_paintings
+from cte 
+where rank = 1
+
+
+-- 16) Identify the artists whose paintings are displayed in multiple countries
+
+with countries as
+(
+select distinct a.full_name as artist, m.country
+from work w
+join artist a
+on w.artist_id = a.artist_id
+join museum m 
+on w.museum_id = m.museum_id
+-- group by a.full_name, m.country
+)
+
+SELECT artist, count(1) as no_of_countries
+from countries
+group by artist
+having count(1) > 1
+order by 2 desc
+
+
+-- 17) Display the country and the city with most no of museums. 
+-- Output 2 seperate columns to mention the city and country. 
+-- If there are multiple value, seperate them with comma.
+
+
+with country AS
+(
+    select 
+        country, count(1), 
+        rank() over(order by count(1) desc) as rank
+    from museum 
+    group by country
+),
+
+city as 
+(
+    SELECT
+        city, count(1),
+        rank() over(order by count(1) desc) as rank 
+    from museum 
+    group by city
+)
+
+SELECT string_agg(distinct country, ' , ') as country, string_agg(distinct city, ' , ') as city 
+from country co 
+cross join city ci 
+where co.rank = 1 and ci.rank = 1
+
+
+
+-- 18) Identify the artist and the museum where the most expensive and least expensive painting is placed. 
+-- Display the artist name, sale_price, painting name, museum name, museum city and canvas label
+
+with price as
+(
+    select 
+        *,
+        rank() over(order by sale_price desc) as most_expensive,
+        rank() over(order by sale_price ) as least_expensive
+    from product_size
+)
+
+select distinct 
+    a.full_name as artist, 
+    w.name as painting, 
+    m.name as museum, 
+    p.sale_price,
+    m.city as city,
+    m.country as country,
+    c.label as label
+
+from price p 
+
+join work w on p.work_id = w.work_id
+join artist a on a.artist_id = w.artist_id
+join museum m on w.museum_id = m.museum_id
+join canvas_size c on c.size_id = p.size_id :: numeric 
+where most_expensive = 1 or least_expensive = 1
+
+
+
+-- 19) Which country has the 5th highest no of paintings?
+
+with count as 
+(
+    select 
+        m.country as country, count(1) as no_of_paintings,
+        rank() over(order by count(1) desc) as rank
+    from work w
+    join museum m
+    on w.museum_id = m.museum_id
+    group by country
+)
+
+select country, no_of_paintings, rank
+from count 
+where rank = 5
+
+
+-- 20) Which are the 3 most popular and 3 least popular painting styles?
+
+with cte as
+(
+    select 
+        style, count(name),
+        dense_rank() over(order by count(name) desc) as most,
+        dense_rank() over(order by count(name)) as least
+    from work
+    where style is not null
+    group by style
+    order by 2 desc
+)
+
+select style, 
+    case 
+    when most <= 3 then 'Most_Popular'
+    when least <= 3 then 'Least_Popular'
+    end as result 
+from cte
+where most <= 3 or least <= 3
+
+
+-- 21) Which artist has the most no of Portraits paintings outside USA?. 
+-- Display artist name, no of paintings and the artist nationality.
+
+with cte as
+(
+select 
+    a.full_name as artist, subject,
+    count(1) as no_of_paintings,
+    nationality,
+    dense_rank() over(order by count(1) desc) as rank
+
+    from artist a
+    join work w on a.artist_id = w.artist_id 
+    join subject s on s.work_id = w.work_id
+    join museum m on m.museum_id = w.museum_id
+    where m.country <> 'USA' and s.subject = 'Portraits'
+    group by a.full_name, nationality, subject
+)
+select artist, nationality, subject, no_of_paintings
+from cte
+where rank = 1

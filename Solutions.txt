@@ -174,7 +174,7 @@
 	order by 2 desc;
 
 
-18) Display the country and the city with most no of museums. Output 2 seperate columns to mention the city and country. If there are multiple value, seperate them with comma.
+17) Display the country and the city with most no of museums. Output 2 seperate columns to mention the city and country. If there are multiple value, seperate them with comma.
 	with cte_country as 
 			(select country, count(1)
 			, rank() over(order by count(1) desc) as rnk
@@ -254,4 +254,4 @@ Display the artist name, sale_price, painting name, museum name, museum city and
 		group by a.full_name, a.nationality) x
 	where rnk=1;	
 
-
+	
