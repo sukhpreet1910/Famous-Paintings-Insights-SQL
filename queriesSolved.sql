@@ -156,3 +156,68 @@ from
     having count(1) = 7
 )
 
+-- 11) Which are the top 5 most popular museum? (Popularity is defined based on most no of paintings in a museum)
+
+select m.name, m.city, m.country, no_of_paintings, x.rank
+from 
+(
+    select w.museum_id, count(1) as no_of_paintings, rank() over(order by count(1) desc) rank
+    from museum m
+    join work w 
+    on m.museum_id = w.museum_id
+    group by w.museum_id
+    --order by 3
+)x
+join museum m 
+on m.museum_id = x.museum_id
+where rank <= 5
+order by 5
+
+
+-- 12) Who are the top 5 most popular artist? (Popularity is defined based on most no of paintings done by an artist)
+
+SELECT 
+    w.artist_id, a.full_name, a.nationality, count(1) as no_of_paintings,
+    rank() over(order by count(1) DESC) as rank
+from work w
+join artist a 
+on w.artist_id = a.artist_id
+group by w.artist_id, full_name, nationality
+limit 5
+
+
+-- 13) Display the 3 least popular canva sizes
+
+SELECT *
+FROM
+(
+    SELECT p.size_id, label, count(1), dense_rank() over(order by count(1)) as rank
+    from product_size p
+    join canvas_size c
+    on p.size_id = c.size_id::text
+    GROUP BY p.size_id, label
+    order by 2
+)
+where rank <= 3
+order by 4
+
+
+
+-- 14) Which museum is open for the longest during a day. Dispay museum name, state and hours open and which day?
+
+
+SELECT *
+from(
+    select m.name, m.state as city, m.country, day, open, close,
+    to_timestamp(close, 'HH:MI:PM') - to_timestamp(open, 'HH:MI:AM') as duration,
+    rank() over(order by to_timestamp(close, 'HH:MI:PM') - to_timestamp(open, 'HH:MI:AM') desc ) as rank 
+    from museum_hours mh
+    join museum m
+    on mh.museum_id = m.museum_id
+)x
+where rank = 1;
+
+
+-- 15) Which museum has the most no of most popular painting style?
+
+

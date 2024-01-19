@@ -20,15 +20,15 @@
 
 10) How many museums are open every single day?
 
-12) Which are the top 5 most popular museum? (Popularity is defined based on most no of paintings in a museum)
+11) Which are the top 5 most popular museum? (Popularity is defined based on most no of paintings in a museum)
 
-13) Who are the top 5 most popular artist? (Popularity is defined based on most no of paintings done by an artist)
+12) Who are the top 5 most popular artist? (Popularity is defined based on most no of paintings done by an artist)
 
-14) Display the 3 least popular canva sizes
+13) Display the 3 least popular canva sizes
 
-15) Which museum is open for the longest during a day. Dispay museum name, state and hours open and which day?
+14) Which museum is open for the longest during a day. Dispay museum name, state and hours open and which day?
 
-16) Which museum has the most no of most popular painting style?
+15) Which museum has the most no of most popular painting style?
 
 17) Identify the artists whose paintings are displayed in multiple countries
 
