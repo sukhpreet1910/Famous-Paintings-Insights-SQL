@@ -24,7 +24,8 @@
 	from (select *
 		  , rank() over(order by sale_price desc) as rnk 
 		  from product_size) ps
-	join canvas_size cs on cs.size_id::text=ps.size_id
+	join canvas_size cs 
+	on cs.size_id::text=ps.size_id
 	where ps.rnk=1;					 
 
 

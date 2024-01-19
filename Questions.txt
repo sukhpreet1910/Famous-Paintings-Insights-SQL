@@ -2,21 +2,19 @@
 
 1) Fetch all the paintings which are not displayed on any museums?
 
-2) Are there museuems without any paintings?
+2) How many paintings have an asking price of more than their regular price? 
 
-3) How many paintings have an asking price of more than their regular price? 
+3) Identify the paintings whose asking price is less than 50% of its regular price
 
-4) Identify the paintings whose asking price is less than 50% of its regular price
+4) Which canva size costs the most?
 
-5) Which canva size costs the most?
+5) Delete duplicate records from work, product_size, subject and image_link tables
 
-6) Delete duplicate records from work, product_size, subject and image_link tables
+6) Identify the museums with invalid city information in the given dataset
 
-7) Identify the museums with invalid city information in the given dataset
+7) Museum_Hours table has 1 invalid entry. Identify it and remove it.
 
-8) Museum_Hours table has 1 invalid entry. Identify it and remove it.
-
-9) Fetch the top 10 most famous painting subject
+8) Fetch the top 10 most famous painting subject
 
 10) Identify the museums which are open on both Sunday and Monday. Display museum name, city.
 
@@ -45,3 +43,4 @@
 22) Which artist has the most no of Portraits paintings outside USA?. Display artist name, no of paintings and the artist nationality.
 
 
+ 
